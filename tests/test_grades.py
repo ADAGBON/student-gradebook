@@ -1,5 +1,6 @@
-from gradebook.grades import average, letter_grade, validate_score
 import pytest
+
+from gradebook.grades import average, letter_grade, validate_score
 
 
 def test_average_of_simple_list():

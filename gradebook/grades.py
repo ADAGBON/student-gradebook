@@ -1,5 +1,4 @@
 """Core grade calculations."""
-import os
 
 
 def average(scores):
