@@ -76,8 +76,10 @@ and CI now fails any future push that reintroduces these problems.
 
 ## 4. Code reviews
 
-Every change was made on its own branch and merged into `main` through a pull request
-using the checklist in `.github/pull_request_template.md`.
+Every change was made on its own branch and merged into `main` through a pull request.
+Each pull request was reviewed by the author against the checklist in
+`.github/pull_request_template.md` before merging. David has been requested as peer
+reviewer on GitHub; his feedback will be added to the pull requests once received.
 
 | Branch / PR | Reviewer focus | Findings | Outcome |
 |---|---|---|---|
@@ -88,8 +90,8 @@ using the checklist in `.github/pull_request_template.md`.
 | `chore/linting` | Style consistency | 2 lint errors, 2 unformatted files | All fixed; lint + format steps added to CI |
 | `feature/class-summary` | Input validation | Summary accepted scores above 100 | Each score now validated; test added; merged |
 
-> **Reviewer names and PR links:** replace this line with the GitHub PR numbers and the
-> classmates who reviewed each one, e.g. `#4 – reviewed by @classmate`.
+**Review method:** self-review against the PR checklist (author: Lawrence Adagbon).
+**Peer reviewer requested:** David (pending).
 
 ## 5. How to reproduce
 
