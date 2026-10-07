@@ -26,3 +26,8 @@ def test_letter_grade_boundaries(score, expected):
 def test_letter_grade_rejects_invalid_score():
     with pytest.raises(ValueError):
         letter_grade(-1)
+
+
+def test_average_is_rounded_to_one_decimal():
+    assert average([70, 80, 81]) == 77.0
+    assert average([1, 2, 2]) == 1.7

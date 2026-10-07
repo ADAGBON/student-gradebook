@@ -3,8 +3,8 @@ import os
 
 
 def average(scores):
-    """Return the mean of a list of scores."""
-    return sum(scores) / len(scores)
+    """Return the mean of a list of scores, rounded to 1 decimal place."""
+    return round(sum(scores) / len(scores), 1)
 
 
 def validate_score(score):
