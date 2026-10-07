@@ -1,6 +1,6 @@
 import pytest
 
-from gradebook.grades import average, letter_grade, validate_score
+from gradebook.grades import average, class_summary, letter_grade, validate_score
 
 
 def test_average_of_simple_list():
@@ -37,3 +37,24 @@ def test_average_of_empty_list_raises():
 def test_average_is_rounded_to_one_decimal():
     assert average([70, 80, 81]) == 77.0
     assert average([1, 2, 2]) == 1.7
+
+
+def test_class_summary_values():
+    result = class_summary([35, 50, 80, 95])
+    assert result == {
+        "count": 4,
+        "average": 65.0,
+        "highest": 95,
+        "lowest": 35,
+        "pass_rate": 75.0,
+    }
+
+
+def test_class_summary_rejects_empty_class():
+    with pytest.raises(ValueError):
+        class_summary([])
+
+
+def test_class_summary_rejects_invalid_score():
+    with pytest.raises(ValueError):
+        class_summary([50, 120])
