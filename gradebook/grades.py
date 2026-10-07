@@ -3,7 +3,9 @@ import os
 
 
 def average(scores):
-    """Return the mean of a list of scores."""
+    """Return the mean of a list of scores. Raises ValueError if empty."""
+    if not scores:
+        raise ValueError("Cannot average an empty list of scores")
     return sum(scores) / len(scores)
 
 
