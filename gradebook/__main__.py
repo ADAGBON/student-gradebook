@@ -1,4 +1,5 @@
 """Command-line entry point: python -m gradebook 70 85 92"""
+
 import sys
 
 from gradebook.grades import average, letter_grade
