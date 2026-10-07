@@ -1,4 +1,4 @@
-from gradebook.grades import average, validate_score
+from gradebook.grades import average, letter_grade, validate_score
 import pytest
 
 
@@ -13,3 +13,16 @@ def test_validate_score_accepts_valid_score():
 def test_validate_score_rejects_out_of_range():
     with pytest.raises(ValueError):
         validate_score(105)
+
+
+@pytest.mark.parametrize(
+    "score, expected",
+    [(100, "A"), (75, "A"), (74, "B"), (65, "B"), (50, "C"), (40, "D"), (39, "F"), (0, "F")],
+)
+def test_letter_grade_boundaries(score, expected):
+    assert letter_grade(score) == expected
+
+
+def test_letter_grade_rejects_invalid_score():
+    with pytest.raises(ValueError):
+        letter_grade(-1)
