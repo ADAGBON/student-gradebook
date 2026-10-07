@@ -26,3 +26,8 @@ def test_letter_grade_boundaries(score, expected):
 def test_letter_grade_rejects_invalid_score():
     with pytest.raises(ValueError):
         letter_grade(-1)
+
+
+def test_average_of_empty_list_raises():
+    with pytest.raises(ValueError):
+        average([])
