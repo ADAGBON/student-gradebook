@@ -12,5 +12,6 @@ target-version = "py311"
 # E/W = pycodestyle, F = pyflakes, I = import sorting, B = bugbear, UP = pyupgrade
 select = ["E", "W", "F", "I", "B", "UP"]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+   [tool.pytest.ini_options]
+   testpaths = ["tests"]
+   pythonpath = ["."]
