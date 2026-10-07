@@ -31,3 +31,19 @@ def letter_grade(score):
         return "D"
     else:
         return "F"
+
+
+def class_summary(scores):
+    """Return a summary dict for a class: count, average, highest, lowest, pass rate."""
+    if not scores:
+        raise ValueError("Cannot summarise an empty class")
+    for s in scores:
+        validate_score(s)
+    passed = sum(1 for s in scores if s >= 40)
+    return {
+        "count": len(scores),
+        "average": average(scores),
+        "highest": max(scores),
+        "lowest": min(scores),
+        "pass_rate": round(passed / len(scores) * 100, 1),
+    }
