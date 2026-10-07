@@ -89,3 +89,5 @@ pyproject.toml                 ruff + pytest configuration
 QA_REPORT.md                   tests, lint findings, code reviews
 REFLECTION.md                  short reflection
 ```
+
+Peer review requested from David.
