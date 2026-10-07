@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Lint, build & test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Lint with ruff
+        run: ruff check .
+
+      - name: Check formatting with ruff
+        run: ruff format --check .
+
+      - name: Build check (compile every module)
+        run: python -m compileall -q gradebook
+
+      - name: Smoke test the command-line app
+        run: python -m gradebook 70 85 92
+
+      - name: Run unit tests with coverage
+        run: pytest --cov=gradebook --cov-report=term-missing --cov-fail-under=90
+
+  notify:
+    name: Report build result
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build passed
+        if: needs.test.result == 'success'
+        run: echo "::notice title=Build passed::All lint checks and tests passed for ${{ github.sha }}"
+      - name: Build failed
+        if: needs.test.result != 'success'
+        run: |
+          echo "::error title=Build failed::Lint or tests failed for ${{ github.sha }} - open the Actions tab for details"
+          exit 1
